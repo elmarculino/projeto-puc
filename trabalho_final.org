@@ -1,0 +1,95 @@
+#+title: Trabalho Final
+
+* Escopo do Trabalho
+ 1. Definição do Problema
+    Uma dica é utilizar o método dos 5 W’s : why (por que), who (quem), what (o que), when (quando) e where (onde).
+ 2. Coleta de Dados
+    Para o seu TCC, você deverá utilizar múltiplas fontes de dados. Ou seja, você deve usar mais de um dataset de fontes diferentes, integrando-os, se possível, em uma única fonte de dados.
+ 3. Processamento/Tratamento de Dados
+ 4. Análise e Exploração dos Dados
+    Aqui o uso do Python e/ou R e suas poderosas bibliotecas gráficas (Matplotlib, Seaborn, ggPlot2, etc).
+ 5. Criação, treinamento, aplicação e avaliação de Modelos de Machine Learning
+   Você deve testar no mínimo 3 algoritmos, justificando sua escolha. Explique o funcionamento de cada algoritmo e suas vantagens/desvantagens.
+   Observação 1: é EXTREMAMENTE recomendável que você utilize validação cruzada (cross-validation).
+   Observação 2: escolha métricas adequadas para avaliar o seu modelo.
+ 6. Interpretação dos Resultados
+ 7. Apresentação dos Resultados
+
+* Produto a ser entregue
+** TODO Relatório conforme template disponibilizado (em formato PDF)
+** TODO Link para vídeo no Youtube (tempo máximo de 5 minutos)
+** TODO Endereço do repositório
+
+* Canvas
+** How to Use the Data Science Workflow Canvas
+ + Step 1: Identify your problem statement
+   What problem are you trying to solve? And what larger issues do that problem address? This section helps you address the “why” of your  project.
+ + Step 2: State your intended outcomes/predictions
+   Yes, you won’t know what your outcomes are until after you’re done with your project, but you should at least have an idea of what you think they should look like. Identify potential predictor (X) and/or target (y) variables.
+ + Step 3: Determine your data sources
+   Where are you sourcing your data from? Is there enough data? And can you actually work with it? Sometimes you might have access to ready-made datasets, or you might need to scrape your data.
+ + Step 4: Choose your model(s)
+   Choose your model(s) depending on your answers to these questions: are your outcomes discrete or continuous? Do you have labeled or unlabeled datasets? Are you concerned with outliers? How well do you want to interpret your results? The list of questions can vary depending on your project.
+ + Step 5: Identify model evaluation metrics
+   Identify corresponding model evaluation metrics to interpret your outcomes. Every model will have its own set of evaluation metrics.
+ + Step 6: Create a data preparation plan
+   What do you need to do to your data in order to run your model and achieve your outcomes? Data preparation includes data cleaning, feature selection, feature engineering, exploratory data analysis, and so on.
+
+
+* Desenvolvimento
+
+1. Definição do Problema
+    Uma dica é utilizar o método dos 5 W’s : why (por que), who (quem), what (o que), when (quando) e where (onde).
+
+   a) Porque
+    A administração de restaurantes demanda dos gestores cuidado com detalhes e, cada vez mais, cuidado com os dados do empreendimento. O gerenciamento de estoque e a necessidade de lídar com alimentos perecíveis exige dos responsáveis o exercício regular da previsão do futuro.
+
+    A natural variação do faturamento entre os dias da semana, meses e estações do ano foi ainda mais potencializada pela pandemia, sendo o turísmo uma das indústrias afetadas pelo Corona Vírus.
+
+    o que fez com que restaurantes que já lidam com a sazonalidade da demanda
+
+    O faturamento obtido em um feriado nacional pode  ser várias vezes maior que de um dia normal de funcionamento e, da precisão da previsão do quanto comprar de um determinado item ou quantos ajudantes contratar depende o quanto desse faturamento será transformado em lucro ou prejuízo.
+
+    Com modelos cada vez mais precisos e acessíveis é possível desenvolver novas ferramentas de análise para auxíliar no exercício empírico de prever o futuro.
+
+
+
+    Naturalmento
+    O ramo do turismo foi um dos mais afetados pela pandemia do Corona Vírus o que fez com que restaurantes que já lidam com a sazonalidade da demanda
+      -
+
+   b) Quem
+
+   c) O que
+      Realizar o treinamento de um modelo de machine learning para auxíliar na estimativa de demanda e definição de quatidades de compra e estoque mínimo para produtos.
+
+
+   d) Quando
+
+
+   e) Onde
+      Restaurante de praia localizado em São Miguél do Milagres - AL. Uma das melhores e mais conhecidas práias do estado, a cidade está localizada entre a capital, Maceió, e Recife-PE. Tem uma das festas de reveillon mais movimentadas do nordeste, e é também o destino de casais de noivos de todo país procurando pela capéla a beira mar. Estes atrativos fornecem uma fluxo constande de visitantes para a cidade e de clientes para o restaurante, mas nem de perto, a quantidade esperada para algumas semanas entre Dezembro e Janeiro. Esse diferença de demanda, em um curto periodo do ano, representa uma oportunidade de lucro e um desafio para os gestores que precisam estimar investido em estoque, infraestrutura e pessoal para atender a demanda.
+
+1. Coleta de Dados
+   Os dados de consumo estão armazenados no sistema de vendas do restaurante. Através destes dados é possível extrair as quantidades consumidas agrupando por diferentes periodos de tempo.
+
+   Outro dado escolhido para auxiliar na análise foi o de caledário de feriados nacionais, já que a variação de movimento é bastante significativa em dias próximos a feriados.
+
+   * Dados do sistema de vendas
+     Foi foi gerado um arquivo parquet a partir de uma view na base de dado MSSQL do sistema de vendas do restaurante. A partir da tabela de vendas foi extraído um dataset contendo os produtos 'A' da curva ABC de faturamento, representando os produtos que somados representam mais que 70% de todo o faturamento do negócio. No dataset os dados estão agrupados por dia e id do produto, e traz a soma das quantidades vendidas e seu valor total.
+
+   * Calendário de feriados nacionais
+     Foi extraído um dataset de datas de feriados nacionais entre 2019 e 2022 utilizando o pacote BeaultifulSoup. Os dados estavam em tabelas html dividídas por ano, foi então desenvolvido um script de scraping para extração da lista de datas e exportado como um arquivo .feather para posterior utilização no tratamento dos dados.
+
+3. Processamento/Tratamento de Dados
+
+   O dataset utilizado para a análise tem como princípal feature a data, e por esse motivo foi feita a expanção das informações que uma data possui. Uma data, por si só, não fornece muito valor para o treinamento de um modelo de machine learning mas, todas as informações que podem ser extraídas dela, podem geram features com muito valor para o modelo. Para isso a primeira feature integrada foi a booleana de feriados, e depois disso a coluna de data foi 'quebrada' em outras 13, contendo dados de dia, mes, ano, semana, dia do ano, se fim de mes e assim por diante.
+
+4. Análise e Exploração dos Dados
+
+
+5. Criação, treinamento, aplicação e avaliação de Modelos de Machine Learning
+
+6. Interpretação dos Resultados
+
+7. Apresentação dos Resultados
